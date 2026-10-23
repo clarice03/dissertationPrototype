@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-prototype="traditional">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#242424">
+    <meta name="description" content="LOWKEY product details.">
+    <title>Product — LOWKEY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jockey+One&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/css/site.css">
+    <link rel="stylesheet" href="../shared/css/product.css">
+    <script type="module" src="../shared/js/product.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="announcement">FREE SHIPPING ON ORDERS OVER €100 <span aria-hidden="true">✳</span> NOTHING TO PROVE</div>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="LOWKEY home"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.32.png" alt="LOWKEY"></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+        <a href="shop.html" aria-current="page">Shop</a><a href="index.html#drops">New drops</a><a href="index.html#categories">Collections</a><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="shop.html" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 5 5"></path></svg></a>
+        <a class="icon-button" href="shop.html?wishlist=1" aria-label="View saved products"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5.4-8.8 11-8.8 11S3.2 14.1 3.2 8.7a4.4 4.4 0 0 1 8.8-.5 4.4 4.4 0 0 1 8.8.5Z"></path></svg></a>
+        <button class="cart-link icon-button" type="button" aria-label="Shopping bag, 0 items" aria-controls="cart-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" aria-live="polite">0</span></button>
+      </div>
+    </header>
+
+    <main id="main" class="product-page">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="./">HOME</a><span aria-hidden="true">/</span><a href="shop.html">SHOP</a><span aria-hidden="true">/</span><span id="breadcrumb-product">PRODUCT</span></nav>
+      <div class="product-detail-layout">
+        <section class="product-gallery" aria-label="Product image">
+          <div class="detail-image-wrap"><div id="detail-image" class="detail-image" role="img"></div><span class="detail-image-index">LOWKEY / ITEM <b>01</b></span></div>
+          <p class="image-caption">PRODUCT IMAGE · LOWKEY CATALOGUE</p>
+        </section>
+        <section class="product-detail-info" aria-labelledby="product-name">
+          <p id="product-category" class="detail-category"></p>
+          <h1 id="product-name"></h1>
+          <p id="product-price" class="detail-price"></p>
+          <p id="product-description" class="detail-description"></p>
+
+          <fieldset class="detail-options"><legend>COLOUR <span id="selected-colour-label"></span></legend><div id="colour-options" class="colour-options"></div></fieldset>
+          <fieldset class="detail-options size-fieldset"><legend>SIZE <span class="size-guide-note">SELECT ONE</span></legend><div id="size-options" class="size-options"></div><p id="size-error" class="field-error" aria-live="polite"></p></fieldset>
+
+          <div class="purchase-row"><div class="quantity-control" role="group" aria-label="Quantity"><button id="quantity-decrease" type="button" aria-label="Decrease quantity">−</button><output id="quantity-value" aria-live="polite">1</output><button id="quantity-increase" type="button" aria-label="Increase quantity">+</button></div><button id="add-to-cart" class="button button-lime add-to-cart" type="button">ADD TO BAG <span aria-hidden="true">↗</span></button></div>
+          <button id="wishlist-toggle" class="detail-wishlist" type="button" aria-pressed="false">♡ <span>SAVE TO WISHLIST</span></button>
+          <p class="mock-notice">SIMULATED STORE · NO REAL ORDERS OR PAYMENTS</p>
+          <details class="product-information"><summary>PRODUCT INFORMATION</summary><p id="detail-information"></p></details>
+          <details class="product-information"><summary>DELIVERY</summary><p>Delivery is simulated in this prototype. No personal delivery details are requested on this page.</p></details>
+          <a class="back-to-shop" href="shop.html">← BACK TO ALL PRODUCTS</a>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.32.png" alt="LOWKEY"><p>NOTHING TO PROVE.</p></div><div class="footer-column"><h2>EXPLORE</h2><a href="shop.html">Shop all</a><a href="index.html#categories">Collections</a><a href="index.html#about">Our story</a></div><div class="footer-column"><h2>INFO</h2><a href="mailto:hello@lowkey.example">Contact</a><a href="index.html#main">Shipping & returns</a><a href="index.html#main">Instagram ↗</a></div><div class="footer-news"><p class="eyebrow">STAY IN THE LOOP</p><p>New drops. No noise.</p><a class="text-link" href="mailto:hello@lowkey.example">GET IN TOUCH <span aria-hidden="true">↗</span></a></div></div><div class="footer-bottom"><span>© 2026 LOWKEY STUDIO. A RESEARCH PROTOTYPE.</span><span>MADE TO MOVE DIFFERENT.</span></div></footer>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+    <aside id="cart-panel" class="cart-panel" aria-label="Shopping bag" aria-hidden="true"><div class="cart-panel-head"><h2>YOUR BAG <span class="cart-count">0</span></h2><button class="cart-close" aria-label="Close bag" type="button">×</button></div><div class="cart-items"></div><p class="cart-empty">Your bag is empty.<br>Find something that feels like you.</p><a class="button button-lime cart-continue" href="shop.html">KEEP EXPLORING ↗</a></aside><div class="cart-scrim"></div>
+  </body>
+</html>

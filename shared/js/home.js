@@ -69,8 +69,8 @@ showHeroSlide(0);
 
 function productCard(product) {
   return `<article class="product-card">
-    <div class="product-visual"><div class="product-image" role="img" aria-label="${safe(product.name)}" style="--sheet-x:${product.sheetPosition.x}%;--sheet-y:${product.sheetPosition.y}%"></div><button class="wishlist-button" type="button" data-wishlist-id="${safe(product.id)}" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
-    <div class="product-info"><div><h3>${safe(product.name)}</h3><p>${safe(product.category)} <span>·</span> ${product.sizes.join(' / ')}</p></div><strong>${currency.format(product.price)}</strong></div>
+    <div class="product-visual"><a class="product-view-link" href="product.html?id=${encodeURIComponent(product.id)}" aria-label="View ${safe(product.name)} details"><div class="product-image" role="img" aria-label="${safe(product.name)}" style="--sheet-x:${product.sheetPosition.x}%;--sheet-y:${product.sheetPosition.y}%"></div></a><button class="wishlist-button" type="button" data-wishlist-id="${safe(product.id)}" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
+    <div class="product-info"><div><h3><a href="product.html?id=${encodeURIComponent(product.id)}">${safe(product.name)}</a></h3><p>${safe(product.category)} <span>·</span> ${product.sizes.join(' / ')}</p></div><strong>${currency.format(product.price)}</strong></div>
     <button class="quick-add" type="button" data-product-id="${safe(product.id)}">QUICK ADD <span aria-hidden="true">+</span></button>
     </article>`;
 }

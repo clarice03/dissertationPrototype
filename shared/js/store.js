@@ -11,11 +11,11 @@ export function writeCart(cart) {
   try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch { /* graceful private-mode fallback */ }
 }
 
-export function addToCart(product, size = product.sizes[0], colour = product.colours[0]) {
+export function addToCart(product, size = product.sizes[0], colour = product.colours[0], quantity = 1) {
   const cart = readCart();
   const existing = cart.find(item => item.id === product.id && item.size === size && item.colour === colour);
-  if (existing) existing.quantity += 1;
-  else cart.push({ id: product.id, name: product.name, price: product.price, size, colour, quantity: 1 });
+  if (existing) existing.quantity += quantity;
+  else cart.push({ id: product.id, name: product.name, price: product.price, size, colour, quantity });
   writeCart(cart);
   return cart;
 }
