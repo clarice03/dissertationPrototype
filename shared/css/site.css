@@ -13,3 +13,8 @@
 .brand{width:118px}.brand img{filter:none}
 @media(max-width:620px){.brand{width:96px}}
 .site-footer{background:#000}.footer-brand img{filter:none}
+.hero-index .hero-prev,.hero-index .hero-next{width:24px;height:24px;padding:0;border:1px solid #777;background:transparent;color:var(--offwhite);font-size:14px;line-height:1;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.hero-index .hero-prev:hover,.hero-index .hero-next:hover{background:var(--lime);color:var(--charcoal);border-color:var(--lime)}.hero-index .hero-current{color:var(--lime)}.hero-index .index-line{position:relative;overflow:hidden}.hero-index .index-progress{position:absolute;left:0;top:0;height:100%;background:var(--lime);transition:width .25s ease}
+.hero.is-text-only{grid-template-columns:1fr;text-align:center}.hero.is-text-only .hero-copy{width:min(100%,1000px);margin:auto}.hero.is-text-only .eyebrow{text-align:center}.hero.is-text-only h1{font-size:clamp(100px,16vw,220px)}.hero.is-text-only .button{margin-inline:auto}.hero-art[hidden]{display:none}
+@media(max-width:620px){.hero.is-text-only{justify-content:center;min-height:calc(100svh - 90px);padding-bottom:85px}.hero.is-text-only h1{font-size:clamp(82px,18vw,110px)}}
+.product-image{background-image:url("../LOWKEY%20Streetwear%20Catalog%20Grid.png");background-repeat:no-repeat;background-size:1100% 620%;background-position:var(--sheet-x) var(--sheet-y)}
+.product-image{position:absolute;inset:0;transition:transform .4s}.product-card:hover .product-image{transform:scale(1.03)}

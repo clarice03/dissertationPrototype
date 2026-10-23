@@ -1,17 +1,65 @@
-// One source of product truth for both research prototypes.
-export const products = [
-  { id: 'lk-hoodie-01', name: 'Graffiti Heavyweight Hoodie', category: 'Hoodies', price: 78, description: 'A heavyweight brushed cotton hoodie with the LOWKEY mark.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Lime'], image: null, available: true, featured: true },
-  { id: 'lk-tee-01', name: 'Oversized Essential Tee', category: 'Tees', price: 38, description: 'A relaxed everyday tee, cut from substantial cotton jersey.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Off-white', 'Charcoal'], image: null, available: true, featured: true },
-  { id: 'lk-cargo-01', name: 'Utility Cargo Pant', category: 'Cargos', price: 92, description: 'Roomy utility cargos with considered pocket detailing.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Charcoal', 'Olive'], image: null, available: true, featured: true },
-  { id: 'lk-bomber-01', name: 'Shadow Bomber Jacket', category: 'Jackets', price: 128, description: 'A clean, lightly padded layer for late nights and early starts.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Black'], image: null, available: true, featured: true },
-  { id: 'lk-cap-01', name: 'Signature 6-Panel Cap', category: 'Accessories', price: 32, description: 'An adjustable cotton cap with a tonal LOWKEY detail.', sizes: ['OS'], colours: ['Black', 'Lime'], image: null, available: true, featured: false },
-  { id: 'lk-tee-02', name: 'Washed Graphic Tee', category: 'Tees', price: 42, description: 'A washed finish gives this graphic tee a lived-in feel.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Washed black'], image: null, available: true, featured: false },
-  { id: 'lk-hoodie-02', name: 'Core Zip Hoodie', category: 'Hoodies', price: 84, description: 'A full zip layer with an easy oversized fit.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Charcoal', 'Stone'], image: null, available: true, featured: false },
-  { id: 'lk-cargo-02', name: 'Parachute Cargo', category: 'Cargos', price: 96, description: 'Lightweight volume and adjustable hems for everyday movement.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Olive'], image: null, available: true, featured: false },
-  { id: 'lk-jacket-02', name: 'Track Shell Jacket', category: 'Jackets', price: 110, description: 'A water-resistant shell with a minimal profile.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Stone'], image: null, available: true, featured: false },
-  { id: 'lk-cap-02', name: 'Low Profile Beanie', category: 'Accessories', price: 30, description: 'A soft rib-knit beanie for colder days.', sizes: ['OS'], colours: ['Lime', 'Charcoal'], image: null, available: true, featured: false },
-  { id: 'lk-tee-03', name: 'Nothing To Prove Long Sleeve', category: 'Tees', price: 48, description: 'A heavyweight long sleeve with a quiet statement.', sizes: ['S', 'M', 'L', 'XL'], colours: ['Off-white', 'Black'], image: null, available: true, featured: false },
-  { id: 'lk-bag-01', name: 'Everyday Crossbody Bag', category: 'Accessories', price: 54, description: 'A compact crossbody for the essentials.', sizes: ['OS'], colours: ['Black'], image: null, available: true, featured: false }
+// Shared source of truth for the traditional and future gamified prototypes.
+// The uploaded catalog sheet is one image; sheetPosition selects each product tile.
+const categories = [
+  {
+    key: 'hoodie', name: 'Hoodies', sheetRow: 0, sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Charcoal', 'Off-white', 'Lime'],
+    description: 'A LOWKEY hoodie made for the everyday rotation.',
+    items: [
+      ['Graffiti Hoodie', 78], ['Character Hoodie', 84], ['Shadow Hoodie', 76], ['Star Logo Hoodie', 80], ['Contrast Hoodie', 88],
+      ['Washed Hoodie', 86], ['Flame Hoodie', 82], ['Sketch Hoodie', 79], ['Zip Hoodie', 84], ['Text Hoodie', 76]
+    ]
+  },
+  {
+    key: 'tee', name: 'Tees', sheetRow: 205, sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Off-white', 'Charcoal'],
+    description: 'A LOWKEY graphic tee with an easy, relaxed fit.',
+    items: [
+      ['Classic Logo Tee', 38], ['Character Tee', 42], ['Star Tee', 36], ['Text Tee', 38], ['Distressed Tee', 42],
+      ['Graphic Tee', 40], ['Flame Tee', 40], ['Oversized Tee', 42], ['Layer Tee', 48], ['Back Print Tee', 42]
+    ]
+  },
+  {
+    key: 'cargo', name: 'Cargos', sheetRow: 410, sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Grey', 'Olive'],
+    description: 'A utility-focused LOWKEY trouser with a relaxed shape.',
+    items: [
+      ['Black Cargo Pants', 92], ['Grey Cargo Pants', 92], ['Green Cargo Pants', 94], ['Two Tone Cargo', 98], ['Utility Cargo', 102],
+      ['Parachute Pants', 96], ['Baggy Cargo', 98], ['Washed Cargo', 104], ['Tech Cargo', 110], ['Camo Cargo', 104]
+    ]
+  },
+  {
+    key: 'jacket', name: 'Jackets', sheetRow: 615, sizes: ['S', 'M', 'L', 'XL'], colours: ['Black', 'Charcoal', 'Off-white'],
+    description: 'A LOWKEY outer layer designed to finish the fit.',
+    items: [
+      ['Puffer Jacket', 148], ['Tech Jacket', 128], ['Bomber Jacket', 138], ['Varsity Jacket', 158], ['Denim Jacket', 132],
+      ['Windbreaker', 118], ['Fleece Jacket', 124], ['Padded Jacket', 148], ['Hooded Jacket', 142], ['Zip Jacket', 126]
+    ]
+  },
+  {
+    key: 'accessory', name: 'Accessories', sheetRow: 810, sizes: ['OS'], colours: ['Black', 'Charcoal', 'Off-white', 'Lime'],
+    description: 'A LOWKEY finishing piece for the everyday rotation.',
+    items: [
+      ['Logo Cap', 32], ['Star Cap', 32], ['Beanie', 30], ['Bucket Hat', 34], ['Crossbody Bag', 54],
+      ['Backpack', 78], ['Wallet', 38], ['Sunglasses', 42], ['Belt', 36], ['Socks (3 Pack)', 24]
+    ]
+  }
 ];
+
+export const products = categories.flatMap(category => category.items.map(([name, price], index) => {
+  const sourceX = 139 + Math.round(index * 139.7);
+  return {
+  id: `lk-${category.key}-${String(index + 1).padStart(2, '0')}`,
+  name,
+  category: category.name,
+  price,
+  description: category.description,
+  sizes: category.sizes,
+  colours: category.colours,
+  sheetPosition: {
+    x: Number((sourceX / 1396.36 * 100).toFixed(3)),
+    y: Number((category.sheetRow / 858.84 * 100).toFixed(3))
+  },
+  available: true,
+  featured: index === 0 && category.key !== 'accessory'
+  };
+}));
 
 export const currency = new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' });

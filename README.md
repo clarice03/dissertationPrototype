@@ -4,9 +4,9 @@ Static, vanilla HTML/CSS/JavaScript storefront foundation for the LOWKEY dissert
 
 ## Current scope
 
-The current build is the **traditional homepage and shared Phase 1 foundation**. It includes the brand styles, responsive navigation, four featured items, search overlay, wishlist feedback, mock quick-add cart with LocalStorage persistence, shared sample product data, and an opt-in local-only event logger. The remaining catalogue, product detail, checkout, confirmation, and about pages are not implemented yet. The cart currently demonstrates persistence and item counts; checkout is not available.
+The current build is the **traditional homepage and shared Phase 1 foundation**. It includes the brand styles, responsive navigation, four featured items, search overlay, wishlist feedback, mock quick-add cart with LocalStorage persistence, a shared 50-item catalogue, and an opt-in local-only event logger. The remaining catalogue, product detail, checkout, confirmation, and about pages are not implemented yet. The cart currently demonstrates persistence and item counts; checkout is not available.
 
-Supplied LOWKEY PNGs are referenced in `images/logos/` as provided. Product and category photography has not been supplied; homepage cards and category tiles are deliberately labelled as placeholders. Replace those with approved local assets before participant testing. Jockey One, Montserrat, and Inter currently load from Google Fonts; local font files should be added if the study must work without third-party font requests or needs stable font rendering.
+Supplied LOWKEY PNGs are referenced in `images/logos/` as provided. The 50 product entries use the single `shared/LOWKEY Streetwear Catalog Grid.png` sprite sheet; each record stores a CSS background position for its product tile. Confirm the product names, prices, and imagery before participant testing. Jockey One, Montserrat, and Inter currently load from Google Fonts; local font files should be added if the study must work without third-party font requests or needs stable font rendering.
 
 ## Run locally
 
@@ -18,18 +18,19 @@ Use VS Code's Live Server extension, or any static HTTP server, from the reposit
 index.html                 root entry, forwards to traditional/
 traditional/index.html     Prototype A homepage
 shared/css/site.css        shared design tokens and components
-shared/js/products.js      shared fictional catalogue and prices
+shared/js/products.js      shared 50-item catalogue, prices, and sprite positions
 shared/js/store.js         shared mock cart storage operations
 shared/js/logger.js        disabled-by-default local event logger
 shared/js/home.js          traditional homepage behavior
 images/logos/              original supplied brand artwork
+shared/LOWKEY Streetwear Catalog Grid.png   single 50-product image sheet
 netlify.toml               Netlify static publish and root redirect
 _redirects                 Cloudflare Pages root redirect
 ```
 
 ## Product data
 
-Edit `shared/js/products.js`. Keep product IDs stable and unique. Both prototypes must import this same catalogue so names, categories, prices, sizes, colours, and availability stay aligned. Set each `image` to a path relative to the site root when local product images are added. Use identical data in both versions for study comparisons.
+Edit `shared/js/products.js`. Keep product IDs stable and unique. Both prototypes must import this same catalogue so names, categories, prices, sizes, colours, and availability stay aligned. Each product's `sheetPosition` selects its tile from the shared catalog image through CSS background positioning. Use identical data in both versions for study comparisons.
 
 ## Adding the gamified version
 

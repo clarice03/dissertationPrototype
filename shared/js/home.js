@@ -6,9 +6,62 @@ const logger = createEventLogger({ enabled: false });
 const grid = document.querySelector('#product-grid');
 const safe = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 
+const heroSlides = [
+  {
+    eyebrow: 'INDEPENDENT STREETWEAR · EST. 2026',
+    title: 'NOTHING<br>TO <span>PROVE.</span>',
+    subtitle: 'Streetwear for the unwritten.',
+    cta: 'SHOP THE DROP',
+    href: '#drops',
+    image: '../images/logos/Screenshot%202026-09-05%20at%2019.12.55.png',
+    alt: 'LOWKEY illustrated character wearing an acid lime hoodie'
+  },
+  {
+    eyebrow: 'BUILT FOR EVERYDAY MOVEMENT',
+    title: 'BUILT<br><span>DIFFERENT.</span>',
+    subtitle: 'Made to move. Made to last.',
+    cta: 'SHOP THE DROP',
+    href: '#drops',
+    image: null,
+    alt: ''
+  },
+  {
+    eyebrow: 'NO RULES. NO APPROVAL.',
+    title: 'WEAR IT<br><span>YOUR WAY.</span>',
+    subtitle: 'Your style. Your call.',
+    cta: 'EXPLORE COLLECTION',
+    href: '#categories',
+    image: null,
+    alt: ''
+  }
+];
+
+let activeHeroSlide = 0;
+function showHeroSlide(index) {
+  activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+  const slide = heroSlides[activeHeroSlide];
+  document.querySelector('.hero-eyebrow-text').textContent = slide.eyebrow;
+  document.querySelector('#hero-title').innerHTML = slide.title;
+  document.querySelector('.hero-subtitle').textContent = slide.subtitle;
+  const cta = document.querySelector('.hero-cta');
+  cta.href = slide.href;
+  cta.innerHTML = `${slide.cta} <span aria-hidden="true">↗</span>`;
+  const artwork = document.querySelector('.hero-art-image');
+  const hero = document.querySelector('.hero');
+  hero.classList.toggle('is-text-only', !slide.image);
+  document.querySelector('.hero-art').hidden = !slide.image;
+  if (slide.image) artwork.src = slide.image;
+  artwork.alt = slide.alt;
+  document.querySelector('.hero-current').textContent = String(activeHeroSlide + 1).padStart(2, '0');
+  document.querySelector('.index-progress').style.width = `${((activeHeroSlide + 1) / heroSlides.length) * 100}%`;
+}
+document.querySelector('.hero-prev').addEventListener('click', () => showHeroSlide(activeHeroSlide - 1));
+document.querySelector('.hero-next').addEventListener('click', () => showHeroSlide(activeHeroSlide + 1));
+showHeroSlide(0);
+
 function productCard(product) {
   return `<article class="product-card">
-    <div class="product-visual"><div class="product-placeholder" data-category="${safe(product.category)}"><span>LOWKEY<br><b>${safe(product.category.toUpperCase())}</b></span><small>PRODUCT IMAGE TO BE ADDED</small></div><button class="wishlist-button" type="button" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
+    <div class="product-visual"><div class="product-image" role="img" aria-label="${safe(product.name)}" style="--sheet-x:${product.sheetPosition.x}%;--sheet-y:${product.sheetPosition.y}%"></div><button class="wishlist-button" type="button" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
     <div class="product-info"><div><h3>${safe(product.name)}</h3><p>${safe(product.category)} <span>·</span> ${product.sizes.join(' / ')}</p></div><strong>${currency.format(product.price)}</strong></div>
     <button class="quick-add" type="button" data-product-id="${safe(product.id)}">QUICK ADD <span aria-hidden="true">+</span></button>
     </article>`;
