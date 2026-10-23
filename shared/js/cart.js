@@ -10,7 +10,11 @@ const money = value => currency.format(Number(value) || 0);
 function renderBag() {
   const cart = readCart();
   const count = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-  const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0);
+  const subtotal = cart.reduce((sum, item) => {
+    const price = Number(products.find(product => product.id === item.id)?.price ?? item.price) || 0;
+    const quantity = Math.min(10, Math.max(1, Number(item.quantity) || 1));
+    return sum + price * quantity;
+  }, 0);
   const shipping = subtotal === 0 || subtotal >= 100 ? 0 : 5;
   const hasItems = cart.length > 0;
 
@@ -24,7 +28,7 @@ function renderBag() {
     ? 'Shipping is simulated.'
     : subtotal >= 100 ? 'Your order qualifies for simulated free delivery.' : `Add ${money(100 - subtotal)} for simulated free delivery.`;
   document.querySelector('#empty-bag').hidden = hasItems;
-  document.querySelector('.checkout-placeholder').disabled = !hasItems;
+  document.querySelector('#checkout-link').hidden = !hasItems;
   document.querySelector('.cart-empty').hidden = hasItems;
   document.querySelector('.cart-continue').hidden = hasItems;
 
