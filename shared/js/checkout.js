@@ -1,34 +1,38 @@
-import { products, currency } from './products.js';
-import { readCart, writeCart } from './store.js';
+import { currency } from './products.js';
+import { readCart, summarizeCart, writeCart } from './store.js';
 import { createEventLogger } from './logger.js';
 
 const logger = createEventLogger({ enabled: false });
-const cart = readCart();
 const money = value => currency.format(Number(value) || 0);
-const productFor = item => products.find(product => product.id === item.id);
-const linePrice = item => Number(productFor(item)?.price ?? item.price) || 0;
-const quantity = item => Math.min(10, Math.max(1, Number(item.quantity) || 1));
-const itemCount = cart.reduce((sum, item) => sum + quantity(item), 0);
-const subtotal = cart.reduce((sum, item) => sum + linePrice(item) * quantity(item), 0);
-const shipping = subtotal === 0 || subtotal >= 100 ? 0 : 5;
-
-document.querySelectorAll('.cart-count').forEach(element => { element.textContent = itemCount; });
-document.querySelector('.cart-page-link').setAttribute('aria-label', `Shopping bag, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`);
+let cart = [];
+let itemCount = 0;
+let subtotal = 0;
+let shipping = 0;
 
 const layout = document.querySelector('#checkout-layout');
 const emptyMessage = document.querySelector('#checkout-empty');
-if (!cart.length) {
-  layout.hidden = true;
-  emptyMessage.hidden = false;
-} else {
-  try { sessionStorage.removeItem('lowkey:last-demo-order'); } catch { /* session storage may be unavailable */ }
+function renderCheckout() {
+  const summary = summarizeCart(readCart());
+  cart = summary.lines;
+  itemCount = summary.itemCount;
+  subtotal = summary.subtotal;
+  shipping = summary.shipping;
+  document.querySelectorAll('.cart-count').forEach(element => { element.textContent = itemCount; });
+  document.querySelector('.cart-page-link').setAttribute('aria-label', `Shopping bag, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`);
+  layout.hidden = cart.length === 0;
+  emptyMessage.hidden = cart.length > 0;
+  if (!cart.length) return;
+
   document.querySelector('#checkout-items').innerHTML = cart.map(item => {
-    const product = productFor(item);
-    return `<div class="checkout-item"><div><strong>${escapeText(product?.name || item.name || 'LOWKEY item')}</strong><p>${escapeText(item.colour)} · Size ${escapeText(item.size)} · Qty ${quantity(item)}</p></div><span>${money(linePrice(item) * quantity(item))}</span></div>`;
+    return `<div class="checkout-item"><div><strong>${escapeText(item.name)}</strong><p>${escapeText(item.colour)} · Size ${escapeText(item.size)} · Qty ${item.quantity}</p></div><span>${money(item.lineTotal)}</span></div>`;
   }).join('');
   document.querySelector('#checkout-subtotal').textContent = money(subtotal);
   document.querySelector('#checkout-shipping').textContent = shipping === 0 ? 'FREE' : money(shipping);
   document.querySelector('#checkout-total').textContent = money(subtotal + shipping);
+}
+renderCheckout();
+if (cart.length) {
+  try { sessionStorage.removeItem('lowkey:last-demo-order'); } catch { /* session storage may be unavailable */ }
   logger.log('checkout_started', { itemCount, subtotal, shipping });
 }
 
@@ -40,13 +44,14 @@ const form = document.querySelector('#checkout-form');
 form.addEventListener('submit', event => {
   event.preventDefault();
   const error = document.querySelector('#checkout-error');
+  renderCheckout();
+  if (!cart.length) {
+    window.location.assign('cart.html');
+    return;
+  }
   if (!form.checkValidity()) {
     error.textContent = 'Complete the required fictional details and choose a simulated payment method.';
     form.reportValidity();
-    return;
-  }
-  if (!readCart().length) {
-    window.location.assign('cart.html');
     return;
   }
 
@@ -55,9 +60,9 @@ form.addEventListener('submit', event => {
     orderNumber,
     items: cart.map(item => ({
       id: item.id,
-      name: productFor(item)?.name || item.name || 'LOWKEY item',
-      price: linePrice(item),
-      quantity: quantity(item),
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
       size: item.size,
       colour: item.colour
     })),
@@ -89,3 +94,6 @@ document.querySelectorAll('.primary-nav a').forEach(link => link.addEventListene
   menuButton.setAttribute('aria-expanded', 'false');
   document.querySelector('.primary-nav').classList.remove('is-open');
 }));
+window.addEventListener('storage', event => {
+  if (event.key === 'lowkey:cart') renderCheckout();
+});

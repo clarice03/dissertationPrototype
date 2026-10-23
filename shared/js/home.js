@@ -1,5 +1,5 @@
 import { products, currency } from './products.js';
-import { addToCart, readCart } from './store.js';
+import { addToCart, readCart, summarizeCart } from './store.js';
 import { createEventLogger } from './logger.js';
 
 const logger = createEventLogger({ enabled: false });
@@ -86,12 +86,13 @@ grid.querySelectorAll('.wishlist-button').forEach(button => {
 
 const renderCart = () => {
   const cart = readCart();
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const summary = summarizeCart(cart);
+  const count = summary.itemCount;
   document.querySelectorAll('.cart-count').forEach(el => { el.textContent = count; });
   const cartButton = document.querySelector('.cart-link');
   cartButton.setAttribute('aria-label', `Shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`);
   const items = document.querySelector('.cart-items');
-  items.innerHTML = cart.map(item => `<div class="cart-item"><div><strong>${safe(item.name)}</strong><p>${safe(item.colour)} / ${safe(item.size)} · Qty ${item.quantity}</p></div><span>${currency.format(item.price * item.quantity)}</span></div>`).join('');
+  items.innerHTML = summary.lines.map(item => `<div class="cart-item"><div><strong>${safe(item.name)}</strong><p>${safe(item.colour)} / ${safe(item.size)} · Qty ${item.quantity}</p></div><span>${currency.format(item.lineTotal)}</span></div>`).join('');
   document.querySelector('.cart-empty').hidden = cart.length > 0;
   document.querySelector('.cart-continue').hidden = cart.length > 0;
 };
@@ -176,4 +177,7 @@ document.querySelectorAll('.primary-nav a').forEach(link => link.addEventListene
 }));
 
 renderCart();
+window.addEventListener('storage', event => {
+  if (event.key === 'lowkey:cart') renderCart();
+});
 logger.log('session_started', { page: 'home' });

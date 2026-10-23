@@ -1,5 +1,5 @@
-import { products, currency } from './products.js';
-import { readCart, setCartQuantity, removeCartItem } from './store.js';
+import { currency } from './products.js';
+import { readCart, summarizeCart, setCartQuantity, removeCartItem } from './store.js';
 import { createEventLogger } from './logger.js';
 
 const logger = createEventLogger({ enabled: false });
@@ -9,13 +9,9 @@ const money = value => currency.format(Number(value) || 0);
 
 function renderBag() {
   const cart = readCart();
-  const count = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-  const subtotal = cart.reduce((sum, item) => {
-    const price = Number(products.find(product => product.id === item.id)?.price ?? item.price) || 0;
-    const quantity = Math.min(10, Math.max(1, Number(item.quantity) || 1));
-    return sum + price * quantity;
-  }, 0);
-  const shipping = subtotal === 0 || subtotal >= 100 ? 0 : 5;
+  const summary = summarizeCart(cart);
+  const count = summary.itemCount;
+  const { subtotal, shipping } = summary;
   const hasItems = cart.length > 0;
 
   document.querySelectorAll('.cart-count').forEach(el => { el.textContent = count; });
@@ -32,18 +28,16 @@ function renderBag() {
   document.querySelector('.cart-empty').hidden = hasItems;
   document.querySelector('.cart-continue').hidden = hasItems;
 
-  itemHost.innerHTML = cart.map((item, index) => {
-    const product = products.find(entry => entry.id === item.id);
-    const name = product?.name || item.name || 'LOWKEY item';
-    const price = Number(product?.price ?? item.price) || 0;
-    const quantity = Math.min(10, Math.max(1, Number(item.quantity) || 1));
-    const position = product?.sheetPosition;
+  itemHost.innerHTML = summary.lines.map((item, index) => {
+    const name = item.name;
+    const quantity = item.quantity;
+    const position = item.product?.sheetPosition;
     const imageStyle = position ? `--sheet-x:${position.x}%;--sheet-y:${position.y}%` : '';
     return `<article class="bag-item">
       <a class="bag-item-image" href="product.html?id=${encodeURIComponent(item.id)}" role="img" aria-label="${safe(name)}" style="${imageStyle}"></a>
-      <div class="bag-item-details"><p class="bag-item-category">${safe(product?.category || 'LOWKEY')}</p><h3><a href="product.html?id=${encodeURIComponent(item.id)}">${safe(name)}</a></h3><p class="bag-item-variant">${safe(item.colour)} <span aria-hidden="true">·</span> Size ${safe(item.size)}</p>
+      <div class="bag-item-details"><p class="bag-item-category">${safe(item.category)}</p><h3><a href="product.html?id=${encodeURIComponent(item.id)}">${safe(name)}</a></h3><p class="bag-item-variant">${safe(item.colour)} <span aria-hidden="true">·</span> Size ${safe(item.size)}</p>
         <div class="bag-item-controls"><div class="bag-quantity" role="group" aria-label="Quantity for ${safe(name)}"><button type="button" data-action="decrease" data-index="${index}" aria-label="Decrease ${safe(name)} quantity"${quantity <= 1 ? ' disabled' : ''}>−</button><output>${quantity}</output><button type="button" data-action="increase" data-index="${index}" aria-label="Increase ${safe(name)} quantity"${quantity >= 10 ? ' disabled' : ''}>+</button></div><button class="bag-remove" type="button" data-action="remove" data-index="${index}">REMOVE</button></div>
-      </div><strong class="bag-item-price">${money(price * quantity)}</strong>
+      </div><strong class="bag-item-price">${money(item.lineTotal)}</strong>
     </article>`;
   }).join('');
 }
