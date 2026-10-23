@@ -5,6 +5,14 @@ import { createEventLogger } from './logger.js';
 const logger = createEventLogger({ enabled: false });
 const grid = document.querySelector('#product-grid');
 const safe = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+const WISHLIST_KEY = 'lowkey:wishlist';
+
+function readWishlist() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]');
+    return Array.isArray(saved) ? saved : [];
+  } catch { return []; }
+}
 
 const heroSlides = [
   {
@@ -12,7 +20,7 @@ const heroSlides = [
     title: 'NOTHING<br>TO <span>PROVE.</span>',
     subtitle: 'Streetwear for the unwritten.',
     cta: 'SHOP THE DROP',
-    href: '#drops',
+    href: 'shop.html',
     image: '../images/logos/Screenshot%202026-09-05%20at%2019.12.55.png',
     alt: 'LOWKEY illustrated character wearing an acid lime hoodie'
   },
@@ -21,7 +29,7 @@ const heroSlides = [
     title: 'BUILT<br><span>DIFFERENT.</span>',
     subtitle: 'Made to move. Made to last.',
     cta: 'SHOP THE DROP',
-    href: '#drops',
+    href: 'shop.html',
     image: null,
     alt: ''
   },
@@ -61,13 +69,20 @@ showHeroSlide(0);
 
 function productCard(product) {
   return `<article class="product-card">
-    <div class="product-visual"><div class="product-image" role="img" aria-label="${safe(product.name)}" style="--sheet-x:${product.sheetPosition.x}%;--sheet-y:${product.sheetPosition.y}%"></div><button class="wishlist-button" type="button" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
+    <div class="product-visual"><div class="product-image" role="img" aria-label="${safe(product.name)}" style="--sheet-x:${product.sheetPosition.x}%;--sheet-y:${product.sheetPosition.y}%"></div><button class="wishlist-button" type="button" data-wishlist-id="${safe(product.id)}" aria-label="Save ${safe(product.name)} to wishlist" aria-pressed="false">♡</button><span class="product-badge">NEW DROP</span></div>
     <div class="product-info"><div><h3>${safe(product.name)}</h3><p>${safe(product.category)} <span>·</span> ${product.sizes.join(' / ')}</p></div><strong>${currency.format(product.price)}</strong></div>
     <button class="quick-add" type="button" data-product-id="${safe(product.id)}">QUICK ADD <span aria-hidden="true">+</span></button>
     </article>`;
 }
 
 grid.innerHTML = products.filter(product => product.featured).map(productCard).join('');
+grid.querySelectorAll('.wishlist-button').forEach(button => {
+  const saved = readWishlist().includes(button.dataset.wishlistId);
+  const product = products.find(item => item.id === button.dataset.wishlistId);
+  button.setAttribute('aria-pressed', String(saved));
+  button.setAttribute('aria-label', `${saved ? 'Remove' : 'Save'} ${product.name} ${saved ? 'from' : 'to'} wishlist`);
+  button.textContent = saved ? '♥' : '♡';
+});
 
 const renderCart = () => {
   const cart = readCart();
@@ -94,10 +109,16 @@ document.addEventListener('click', event => {
   }
   const wishlist = event.target.closest('.wishlist-button');
   if (wishlist) {
-    const active = wishlist.getAttribute('aria-pressed') === 'true';
-    wishlist.setAttribute('aria-pressed', String(!active));
-    wishlist.textContent = active ? '♡' : '♥';
-    document.querySelector('.toast').textContent = active ? 'Removed from your wishlist' : 'Saved to your wishlist';
+    const saved = readWishlist();
+    const productId = wishlist.dataset.wishlistId;
+    const product = products.find(item => item.id === productId);
+    const removing = saved.includes(productId);
+    const nextSaved = removing ? saved.filter(id => id !== productId) : [...saved, productId];
+    try { localStorage.setItem(WISHLIST_KEY, JSON.stringify(nextSaved)); } catch { /* storage may be unavailable */ }
+    wishlist.setAttribute('aria-pressed', String(!removing));
+    wishlist.setAttribute('aria-label', `${removing ? 'Save' : 'Remove'} ${product.name} ${removing ? 'to' : 'from'} wishlist`);
+    wishlist.textContent = removing ? '♡' : '♥';
+    document.querySelector('.toast').textContent = removing ? 'Removed from your wishlist' : 'Saved to your wishlist';
     document.querySelector('.toast').classList.add('is-visible');
     window.setTimeout(() => document.querySelector('.toast').classList.remove('is-visible'), 2000);
   }
@@ -133,12 +154,13 @@ searchInput.addEventListener('input', () => {
   const query = searchInput.value.trim().toLowerCase();
   const matching = query ? products.filter(item => `${item.name} ${item.category}`.toLowerCase().includes(query)) : [];
   document.querySelector('.search-results').innerHTML = matching.length
-    ? matching.map(item => `<div class="search-result"><span>${safe(item.name)}</span><strong>${currency.format(item.price)}</strong></div>`).join('')
+    ? matching.map(item => `<a class="search-result" href="shop.html?search=${encodeURIComponent(query)}"><span>${safe(item.name)}</span><strong>${currency.format(item.price)}</strong></a>`).join('')
     : query ? '<p class="search-empty">No pieces found. Try another search.</p>' : '<p class="search-empty">Search the LOWKEY collection.</p>';
 });
 searchInput.addEventListener('keydown', event => {
   if (event.key === 'Enter' && searchInput.value.trim()) {
     logger.log('product_searched', { query: searchInput.value.trim() });
+    window.location.href = `shop.html?search=${encodeURIComponent(searchInput.value.trim())}`;
   }
 });
 

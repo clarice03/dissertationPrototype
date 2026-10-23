@@ -1,0 +1,37 @@
+.shop-page{background:var(--offwhite)}
+.shop-intro{max-width:var(--content);margin:0 auto;padding:88px max(7vw,28px) 62px;border-bottom:1px solid #d8d5cd}
+.shop-intro .eyebrow{color:var(--concrete);margin-bottom:12px}
+.shop-intro h1{font:clamp(76px,12vw,150px)/.78 var(--font-display);margin:0 0 18px;letter-spacing:-.02em}
+.shop-intro h1 span{color:#86be20}
+.shop-intro>p:last-child{color:#6e6b64;font-size:12px;margin:0}
+.catalog-section{max-width:var(--content);margin:auto;padding:44px max(7vw,28px) 110px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:48px}
+.catalog-filters{align-self:start;position:sticky;top:100px}
+.filter-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c9c6be;padding-bottom:13px;margin-bottom:20px}
+.filter-head h2{font:30px var(--font-display);margin:0}
+.clear-filters{border:0;background:none;padding:5px 0;font:700 8px var(--font-ui);letter-spacing:.1em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.filter-label,.price-filter legend{display:block;font:700 8px var(--font-ui);letter-spacing:.13em;margin:20px 0 8px}
+.filter-control{width:100%;height:42px;border:1px solid #c5c2ba;background:transparent;padding:0 10px;color:var(--charcoal);font:10px var(--font-body);border-radius:0}
+.filter-control:focus{border-color:var(--charcoal)}
+.price-filter{border:0;padding:0;margin:22px 0 0;min-width:0}
+.price-filter legend{padding:0}
+.price-inputs{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.price-inputs label{font:700 7px var(--font-ui);letter-spacing:.08em;color:#77746e}
+.price-inputs input{display:block;width:100%;height:38px;margin-top:6px;border:1px solid #c5c2ba;background:transparent;padding:0 8px;font:10px var(--font-body);color:var(--charcoal);border-radius:0}
+.filter-note{font-size:9px;color:#77746e;margin:11px 0}
+.catalog-results{min-width:0}
+.catalog-toolbar{height:43px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #d8d5cd;margin-bottom:20px}
+.result-count,.sort-control{font:700 8px var(--font-ui);letter-spacing:.1em;margin:0}
+.sort-control{display:flex;align-items:center;gap:10px;color:#77746e}
+.sort-control select{border:0;background:transparent;color:var(--charcoal);font:600 9px var(--font-body);padding:0 3px 4px;cursor:pointer}
+.shop-product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 14px}
+.shop-product-card .product-visual{height:clamp(220px,25vw,340px)}
+.shop-product-card .product-info{min-height:59px}
+.shop-product-card .product-info h3{font-size:10px}
+.shop-product-card .product-info p{font-size:8px}
+.shop-size-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 9px;color:#6d6a63;font:700 7px var(--font-ui);letter-spacing:.08em}
+.shop-size-row select{width:106px;height:34px;border:1px solid #c5c2ba;background:transparent;padding:0 7px;color:var(--charcoal);font:10px var(--font-body);border-radius:0}
+.shop-size-row select:focus{border-color:var(--charcoal)}
+.shop-product-card .quick-add:disabled{opacity:.45;cursor:not-allowed;background:transparent;border-color:#c5c2ba}
+.empty-results{padding:60px 15px;text-align:center;background:#e8e5dc;color:#66635d;font-size:12px;line-height:1.7}
+@media(max-width:1000px){.catalog-section{grid-template-columns:180px minmax(0,1fr);gap:28px}.shop-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.shop-intro{padding:62px 22px 40px}.shop-intro h1{font-size:clamp(78px,18vw,120px)}.catalog-section{display:block;padding:28px 20px 70px}.catalog-filters{position:static;display:grid;grid-template-columns:1fr;gap:0;margin-bottom:28px}.filter-head{grid-column:1/-1;margin-bottom:5px}.filter-label{margin-top:15px}.catalog-filters>#catalog-search{grid-column:1/-1}.price-filter{grid-column:1/-1}.filter-note{grid-column:1/-1;margin-bottom:0}.catalog-toolbar{height:auto;min-height:42px;gap:12px}.sort-control{gap:4px;font-size:7px}.sort-control select{max-width:145px;font-size:8px}.shop-product-grid{gap:25px 10px}.shop-product-card .product-visual{height:clamp(205px,62vw,330px)}.shop-product-card .product-info h3{font-size:9px}.shop-product-card .product-info p{font-size:7px}.shop-size-row{gap:5px}.shop-size-row select{width:88px;font-size:9px}}

@@ -19,11 +19,11 @@
       <a class="brand" href="./" aria-label="LOWKEY home"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.32.png" alt="LOWKEY"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu"><span></span><span></span></button>
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
-        <a href="#drops">Shop</a><a href="#drops">New drops</a><a href="#campaign">Collections</a><a href="#about">About</a>
+        <a href="shop.html">Shop</a><a href="#drops">New drops</a><a href="#categories">Collections</a><a href="#about">About</a>
       </nav>
       <div class="header-actions">
         <button class="icon-button search-toggle" aria-label="Search products" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-        <a class="icon-button" href="#drops" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5.4-8.8 11-8.8 11S3.2 14.1 3.2 8.7a4.4 4.4 0 0 1 8.8-.5 4.4 4.4 0 0 1 8.8.5Z"></path></svg></a>
+        <a class="icon-button" href="shop.html?wishlist=1" aria-label="View saved products"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.7c0 5.4-8.8 11-8.8 11S3.2 14.1 3.2 8.7a4.4 4.4 0 0 1 8.8-.5 4.4 4.4 0 0 1 8.8.5Z"></path></svg></a>
         <button class="cart-link icon-button" type="button" aria-label="Shopping bag, 0 items" aria-controls="cart-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" aria-live="polite">0</span></button>
       </div>
     </header>
@@ -34,7 +34,7 @@
           <p class="eyebrow"><span class="lime-dot"></span><span class="hero-eyebrow-text">INDEPENDENT STREETWEAR · EST. 2026</span></p>
           <h1 id="hero-title">NOTHING<br>TO <span>PROVE.</span></h1>
           <p class="hero-subtitle">Streetwear for the unwritten.</p>
-          <a class="button button-lime hero-cta" href="#drops">SHOP THE DROP <span aria-hidden="true">↗</span></a>
+          <a class="button button-lime hero-cta" href="shop.html">SHOP THE DROP <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-art" aria-label="LOWKEY character artwork">
           <span class="art-note">OWN YOUR<br>SPACE / 001</span>
@@ -54,31 +54,31 @@
       <section id="drops" class="drops section-pad" aria-labelledby="drops-title">
         <div class="section-heading">
           <div><p class="eyebrow">FRESH FROM THE STUDIO</p><h2 id="drops-title">NEW DROPS <span class="lime-text">↗</span></h2></div>
-          <a class="text-link" href="#categories">VIEW THE COLLECTION <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="shop.html">VIEW THE COLLECTION <span aria-hidden="true">↗</span></a>
         </div>
         <div id="product-grid" class="product-grid" aria-live="polite"></div>
       </section>
 
       <section id="campaign" class="campaign" aria-labelledby="campaign-title">
         <div class="campaign-image"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.09.png" alt="LOWKEY illustrated character and graffiti brand artwork"><span class="image-label">CAMPAIGN ARTWORK · REPLACE WITH PHOTOGRAPHY</span></div>
-        <div class="campaign-copy"><p class="eyebrow"><span class="lime-dot"></span> THE LOWKEY UNIFORM</p><h2 id="campaign-title">MORE THAN<br>CLOTHES.<br><span>A MINDSET.</span></h2><p>Built different. Worn your way.</p><a class="button button-outline" href="#categories">EXPLORE COLLECTION <span aria-hidden="true">↗</span></a></div>
+        <div class="campaign-copy"><p class="eyebrow"><span class="lime-dot"></span> THE LOWKEY UNIFORM</p><h2 id="campaign-title">MORE THAN<br>CLOTHES.<br><span>A MINDSET.</span></h2><p>Built different. Worn your way.</p><a class="button button-outline" href="shop.html">EXPLORE COLLECTION <span aria-hidden="true">↗</span></a></div>
         <span class="campaign-mark" aria-hidden="true">LK / 001</span>
       </section>
 
       <section id="categories" class="categories section-pad" aria-labelledby="categories-title">
         <div class="section-heading"><div><p class="eyebrow">FIND YOUR LANE</p><h2 id="categories-title">SHOP BY CATEGORY</h2></div><span class="category-note">EVERYDAY PIECES.<br>UNCOMMON ENERGY.</span></div>
         <div class="category-grid">
-          <a href="#drops" class="category-tile tile-hoodies"><span class="tile-num">01 / CATEGORY</span><span class="tile-title">HOODIES</span><span class="tile-arrow">↗</span></a>
-          <a href="#drops" class="category-tile tile-tees"><span class="tile-num">02 / CATEGORY</span><span class="tile-title">TEES</span><span class="tile-arrow">↗</span></a>
-          <a href="#drops" class="category-tile tile-cargos"><span class="tile-num">03 / CATEGORY</span><span class="tile-title">CARGOS</span><span class="tile-arrow">↗</span></a>
-          <a href="#drops" class="category-tile tile-jackets"><span class="tile-num">04 / CATEGORY</span><span class="tile-title">JACKETS</span><span class="tile-arrow">↗</span></a>
-          <a href="#drops" class="category-tile tile-accessories"><span class="tile-num">05 / CATEGORY</span><span class="tile-title">ACCESSORIES</span><span class="tile-arrow">↗</span></a>
+          <a href="shop.html?category=Hoodies" class="category-tile tile-hoodies"><span class="tile-num">01 / CATEGORY</span><span class="tile-title">HOODIES</span><span class="tile-arrow">↗</span></a>
+          <a href="shop.html?category=Tees" class="category-tile tile-tees"><span class="tile-num">02 / CATEGORY</span><span class="tile-title">TEES</span><span class="tile-arrow">↗</span></a>
+          <a href="shop.html?category=Cargos" class="category-tile tile-cargos"><span class="tile-num">03 / CATEGORY</span><span class="tile-title">CARGOS</span><span class="tile-arrow">↗</span></a>
+          <a href="shop.html?category=Jackets" class="category-tile tile-jackets"><span class="tile-num">04 / CATEGORY</span><span class="tile-title">JACKETS</span><span class="tile-arrow">↗</span></a>
+          <a href="shop.html?category=Accessories" class="category-tile tile-accessories"><span class="tile-num">05 / CATEGORY</span><span class="tile-title">ACCESSORIES</span><span class="tile-arrow">↗</span></a>
         </div>
       </section>
 
       <section id="about" class="statement" aria-labelledby="statement-title"><p class="eyebrow">A NOTE FROM LOWKEY</p><h2 id="statement-title">NO RULES. NO APPROVAL.<br><span>NOTHING TO PROVE.</span></h2><p class="statement-copy">Wear what feels like you. The rest is noise.</p></section>
     </main>
-    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.32.png" alt="LOWKEY"><p>NOTHING TO PROVE.</p></div><div class="footer-column"><h2>EXPLORE</h2><a href="#drops">Shop the drop</a><a href="#categories">Collections</a><a href="#about">Our story</a></div><div class="footer-column"><h2>INFO</h2><a href="mailto:hello@lowkey.example">Contact</a><a href="#main">Shipping & returns</a><a href="#main">Instagram ↗</a></div><div class="footer-news"><p class="eyebrow">STAY IN THE LOOP</p><p>New drops. No noise.</p><a class="text-link" href="mailto:hello@lowkey.example">GET IN TOUCH <span aria-hidden="true">↗</span></a></div></div><div class="footer-bottom"><span>© 2026 LOWKEY STUDIO. A RESEARCH PROTOTYPE.</span><span>MADE TO MOVE DIFFERENT.</span></div></footer>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="../images/logos/Screenshot%202026-09-05%20at%2019.12.32.png" alt="LOWKEY"><p>NOTHING TO PROVE.</p></div><div class="footer-column"><h2>EXPLORE</h2><a href="shop.html">Shop the drop</a><a href="#categories">Collections</a><a href="#about">Our story</a></div><div class="footer-column"><h2>INFO</h2><a href="mailto:hello@lowkey.example">Contact</a><a href="#main">Shipping & returns</a><a href="#main">Instagram ↗</a></div><div class="footer-news"><p class="eyebrow">STAY IN THE LOOP</p><p>New drops. No noise.</p><a class="text-link" href="mailto:hello@lowkey.example">GET IN TOUCH <span aria-hidden="true">↗</span></a></div></div><div class="footer-bottom"><span>© 2026 LOWKEY STUDIO. A RESEARCH PROTOTYPE.</span><span>MADE TO MOVE DIFFERENT.</span></div></footer>
     <div class="toast" role="status" aria-live="polite"></div>
     <aside id="cart-panel" class="cart-panel" aria-label="Shopping bag" aria-hidden="true"><div class="cart-panel-head"><h2>YOUR BAG <span class="cart-count">0</span></h2><button class="cart-close" aria-label="Close bag" type="button">×</button></div><div class="cart-items"></div><p class="cart-empty">Your bag is empty.<br>Find something that feels like you.</p><a class="button button-lime cart-continue" href="#drops">KEEP EXPLORING ↗</a></aside><div class="cart-scrim"></div>
     <div class="search-panel" aria-hidden="true"><label for="site-search">SEARCH THE DROP</label><div class="search-field"><input id="site-search" type="search" placeholder="Try hoodie, tee, cap…"><button type="button" class="search-close" aria-label="Close search">×</button></div><div class="search-results"></div></div><div class="search-scrim"></div>

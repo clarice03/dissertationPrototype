@@ -4,24 +4,27 @@ Static, vanilla HTML/CSS/JavaScript storefront foundation for the LOWKEY dissert
 
 ## Current scope
 
-The current build is the **traditional homepage and shared Phase 1 foundation**. It includes the brand styles, responsive navigation, four featured items, search overlay, wishlist feedback, mock quick-add cart with LocalStorage persistence, a shared 50-item catalogue, and an opt-in local-only event logger. The remaining catalogue, product detail, checkout, confirmation, and about pages are not implemented yet. The cart currently demonstrates persistence and item counts; checkout is not available.
+The current build includes the **traditional homepage, a 50-item shop page, and shared Phase 1 foundation**. It includes the brand styles, responsive navigation, homepage carousel, search, category/size/price filters, sorting, wishlist filtering, mock quick-add cart with LocalStorage persistence, shared product data, and an opt-in local-only event logger. Product detail, full cart management, checkout, and order confirmation pages are not implemented yet.
 
 Supplied LOWKEY PNGs are referenced in `images/logos/` as provided. The 50 product entries use the single `shared/LOWKEY Streetwear Catalog Grid.png` sprite sheet; each record stores a CSS background position for its product tile. Confirm the product names, prices, and imagery before participant testing. Jockey One, Montserrat, and Inter currently load from Google Fonts; local font files should be added if the study must work without third-party font requests or needs stable font rendering.
 
 ## Run locally
 
-Use VS Code's Live Server extension, or any static HTTP server, from the repository root. Open `traditional/` (for example, `http://127.0.0.1:5500/traditional/`). ES modules need an HTTP server; opening the file directly with `file://` is not supported. The root `index.html` forwards visitors to the traditional prototype.
+Use VS Code's Live Server extension, or any static HTTP server, from the repository root. Open `traditional/` (for example, `http://127.0.0.1:5500/traditional/`) for the homepage or `traditional/shop.html` for the catalogue. ES modules need an HTTP server; opening the file directly with `file://` is not supported. The root `index.html` forwards visitors to the traditional prototype.
 
 ## Project structure
 
 ```text
 index.html                 root entry, forwards to traditional/
 traditional/index.html     Prototype A homepage
+traditional/shop.html      50-product catalogue and filters
 shared/css/site.css        shared design tokens and components
 shared/js/products.js      shared 50-item catalogue, prices, and sprite positions
 shared/js/store.js         shared mock cart storage operations
 shared/js/logger.js        disabled-by-default local event logger
 shared/js/home.js          traditional homepage behavior
+shared/js/shop.js          catalogue search, filters, sorting, and mock cart
+shared/css/shop.css        catalogue layout and responsive filter styles
 images/logos/              original supplied brand artwork
 shared/LOWKEY Streetwear Catalog Grid.png   single 50-product image sheet
 netlify.toml               Netlify static publish and root redirect
@@ -48,12 +51,12 @@ There is no compile/build step or package manager. Commit the project as a stati
 
 ## Verify the public paths before a study
 
-After deployment, open the HTTPS `/traditional/` URL and confirm the brand images, font rendering, responsive menu, search, wishlist feedback, quick-add, and cart persistence on desktop and mobile browsers. Confirm the host's `/` redirect. After Prototype B exists, check `/gamified/` directly and compare the same products, prices, tasks, navigation, and cart/checkout flow between versions. Check browser developer tools for missing assets and failed requests. These are deployment steps; this repository has not been deployed.
+After deployment, open the HTTPS `/traditional/` URL and `/traditional/shop.html`. Confirm the brand images, font rendering, responsive menu, search, filters, sorting, wishlist, quick-add, and cart persistence on desktop and mobile browsers. Confirm the host's `/` redirect. After Prototype B exists, check `/gamified/` directly and compare the same products, prices, tasks, navigation, and cart/checkout flow between versions. Check browser developer tools for missing assets and failed requests. These are deployment steps; this repository has not been deployed.
 
 ## Needed before participant testing
 
 - Approved product/lifestyle images and any final logos/assets.
-- Completed catalogue, product detail, cart, simulated checkout, and order confirmation pages.
+- Completed product detail, full cart management, simulated checkout, and order confirmation pages.
 - Defined study tasks, task IDs, assignment procedure, and final prototype comparison plan.
 - Approved consent wording, event metadata, data retention/access/export, and an appropriate secure collection destination if central collection is needed.
 - A second `/gamified/` implementation that shares the common data and shopping modules.
