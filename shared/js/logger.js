@@ -1,6 +1,6 @@
 const EVENT_TYPES = new Set([
   'session_started', 'task_started', 'product_searched', 'product_viewed',
-  'filter_applied', 'product_added_to_cart', 'checkout_started',
+  'filter_applied', 'product_added_to_cart', 'cart_updated', 'checkout_started',
   'checkout_completed', 'task_completed', 'product_removed_from_cart'
 ]);
 

@@ -18,4 +18,5 @@
 @media(max-width:620px){.hero.is-text-only{justify-content:center;min-height:calc(100svh - 90px);padding-bottom:85px}.hero.is-text-only h1{font-size:clamp(82px,18vw,110px)}}
 .product-image{background-image:url("../LOWKEY%20Streetwear%20Catalog%20Grid.png");background-repeat:no-repeat;background-size:1100% 620%;background-position:var(--sheet-x) var(--sheet-y)}
 .product-visual .product-view-link{position:absolute;inset:0;display:block;z-index:0}.product-visual .wishlist-button,.product-visual .product-badge{z-index:2}.product-info h3 a:hover{text-decoration:underline;text-underline-offset:3px}
+.cart-view{display:flex;width:100%;justify-content:center;margin:12px 0 0;padding:13px;border:1px solid #c9c6be;font:700 8px var(--font-ui);letter-spacing:.1em}.cart-view:hover{background:var(--lime);border-color:var(--lime)}
 .product-image{position:absolute;inset:0;transition:transform .4s}.product-card:hover .product-image{transform:scale(1.03)}
